@@ -29,7 +29,7 @@
   }
   
   .left-container {
-    background: #E71D23;
+    background: #31e71d65;
     height: 100%;
     width: calc(50% + 50px);
   }
@@ -256,7 +256,7 @@
   }
   
   .left-container__hinge {
-    background: linear-gradient(to right, #7F100F, #E71D23, #E71D23, #7F100F);
+    background: linear-gradient(to right, #0f7d7f, #1daee7,  #0f7d7f, #1daee7);
     height: 75px;
     width: 100%;
   }
@@ -282,7 +282,7 @@
   }
   
   .right-container {
-    background: #E71D23;
+    background: #31e71d65;
     height: calc(100% - 50px);
     padding: 25px;
     width: calc(50% - 50px);
