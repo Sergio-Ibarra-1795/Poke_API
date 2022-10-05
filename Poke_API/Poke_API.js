@@ -1,5 +1,4 @@
 
-//DOM Objecte xtrcion in varibles SECTION
 const mainScreen = document.querySelector('.main-screen')
 const pokeName = document.querySelector('.poke-name')
 const pokeId = document.querySelector('.poke-id')
@@ -141,7 +140,7 @@ const handleListItemClick =(e)=>{
     const listItem = e.target
     if (!listItem.textContent) return
     const idIndividual = listItem.textContent.split('.')[0]
-    console.log(idIndividual)
+    fetchPokeData(idIndividual)
 
 }
 
