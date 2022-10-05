@@ -90,14 +90,23 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0')
 })
 .then(respuestaJson2=>{
     console.log(respuestaJson2)
-    const arrayResultsTwentyPok = respuestaJson2['results']
-    console.log(arrayResultsTwentyPok)
-    console.log(pokeListItems.length)
-
+    const {results} = respuestaJson2
+   
     for(let i=0; i<pokeListItems.length;i++){
          const pokeListItem = pokeListItems[i]
-         const pokeFromTentyArray = arrayResultsTwentyPok[i]
-         const {name} = arrayResultsTwentyPok
+         const pokeFromTentyArray = results[i]
+         const {name} = pokeFromTentyArray
+
+
+         if(pokeFromTentyArray){
+
+            pokeListItem.textContent = name
+            console.log(pokeListItem)
+
+         } else{
+            pokeListItem.textContent = ""
+
+         }
     }
 
 
