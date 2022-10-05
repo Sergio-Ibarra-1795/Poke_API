@@ -60,7 +60,7 @@
   .top-section__green {
     border-radius: 50%;
     border: 1px solid black;
-    height: 10px;
+    height: 50%;
     margin-right: 5px;
     width: 10px;
   }
@@ -171,7 +171,7 @@
   }
   
   .d-pad__cell {
-    background: black;
+    background:blueviolet;
     box-shadow: 0 0 2px 2px rgba(0,0,0, .3);
     height: 25px;
     width: 25px;
@@ -226,7 +226,7 @@
   
   .buttons__button {
     align-items: center;
-    background: black;
+    background:blueviolet;
     border-radius: 50%;
     border: 1px solid dimgrey;
     box-shadow: 0 0 2px 2px rgba(0,0,0, .3);
