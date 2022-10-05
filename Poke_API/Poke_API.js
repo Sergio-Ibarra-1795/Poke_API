@@ -10,6 +10,8 @@ const pokeTypeTwo = document.querySelector('.poke-type-two')
 const pokeWeight = document.querySelector('.poke-weight')
 const pokeHeigt = document.querySelector('.poke-height')
 const pokeListItems =  document.querySelectorAll('.list-item')
+const leftButton = document.querySelector('.left-button')
+const rightButton = document.querySelector('.right-button')
 
 
 //Constant and variables 
@@ -22,6 +24,11 @@ const TYPES = [
     'electric','psychic','ice',
     'dragon','dark','fairy',
 ]
+
+//Theese will be updated every time we fetch the URLs for the click event on PREV &NEXT buttons
+let prevURL = null
+let nextURL = null
+
 
 
 //FUNCTION SECTION
@@ -38,6 +45,50 @@ const resetScreen =()=>{
       mainScreen.classList.remove(type)
     }
 }
+
+
+// To manage the creationg of the list of 20 pokemons displaed on the rifht 
+
+const fetchPokeList = (url) =>{
+fetch(url)
+.then(resultadoFetch2=>{
+    return resultadoFetch2.json()
+})
+.then(respuestaJson2=>{
+    //console.log(respuestaJson2)
+    const {results, previous, next} = respuestaJson2
+    prevURL = previous
+    nextURL = next
+   
+    for(let i=0; i<pokeListItems.length;i++){
+         const pokeListItem = pokeListItems[i]
+         const pokeFromTentyArray = results[i]
+         
+         if(pokeFromTentyArray){
+            const {name, url} = pokeFromTentyArray
+            const urlArray = url.split('/')
+            const idPoke = urlArray[urlArray.length -2]
+
+            pokeListItem.textContent = idPoke + '.' +capitalize(name)
+         } else{
+            pokeListItem.textContent = ""
+
+         }
+    }
+
+
+})
+
+}
+
+
+//To HANDLE event to go next and prev when clicking those buttons
+const handleRightButtonClick =()=>{
+    if (nextURL){
+        fetchPokeList(nextURL)
+    }
+}
+
 
 
 //To fetch the POKEAPI and "transform" the result into a JSON 
@@ -89,20 +140,20 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0')
     return resultadoFetch2.json()
 })
 .then(respuestaJson2=>{
-    console.log(respuestaJson2)
-    const {results} = respuestaJson2
+    const {results, previous, next} = respuestaJson2
+    prevURL = previous
+    nextURL = next
    
     for(let i=0; i<pokeListItems.length;i++){
          const pokeListItem = pokeListItems[i]
          const pokeFromTentyArray = results[i]
-         const {name} = pokeFromTentyArray
-
-
+         
          if(pokeFromTentyArray){
+            const {name, url} = pokeFromTentyArray
+            const urlArray = url.split('/')
+            const idPoke = urlArray[urlArray.length -2]
 
-            pokeListItem.textContent = name
-            console.log(pokeListItem)
-
+            pokeListItem.textContent = idPoke + '.' +capitalize(name)
          } else{
             pokeListItem.textContent = ""
 
@@ -111,3 +162,13 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0')
 
 
 })
+
+
+
+//Adding event listeners 
+
+rightButton.addEventListener('click',handleRightButtonClick)
+
+
+//INITIALIZE APP ()
+fetchPokeList('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0')
