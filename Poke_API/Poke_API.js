@@ -82,6 +82,16 @@ fetch(url)
 }
 
 
+
+//To HANDLE event to go previos and prev when clicking those buttons
+const handleLeftButtonClick =()=>{
+    if (prevURL){
+        fetchPokeList(prevURL)
+    }
+}
+
+
+
 //To HANDLE event to go next and prev when clicking those buttons
 const handleRightButtonClick =()=>{
     if (nextURL){
@@ -89,6 +99,15 @@ const handleRightButtonClick =()=>{
     }
 }
 
+//To HANDLE event listener in every button on the right side 
+const handleListItemClick =(e)=>{
+    if(!e.target) return
+    const listItem = e.target
+    if (!listItem.textContent) return
+    const idIndividual = listItem.textContent.split('.')[0]
+    console.log(idIndividual)
+
+}
 
 
 //To fetch the POKEAPI and "transform" the result into a JSON 
@@ -130,44 +149,15 @@ that populates the pone name, type, etc with the DOM
 })
 
 
-
-
-//To fetch the POKEAPI and "transform" the result into a JSON 
-//Fetch for the right side of the pokedex (Endpoint ends at /pokemon)
-
-fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0')
-.then(resultadoFetch2=>{
-    return resultadoFetch2.json()
-})
-.then(respuestaJson2=>{
-    const {results, previous, next} = respuestaJson2
-    prevURL = previous
-    nextURL = next
-   
-    for(let i=0; i<pokeListItems.length;i++){
-         const pokeListItem = pokeListItems[i]
-         const pokeFromTentyArray = results[i]
-         
-         if(pokeFromTentyArray){
-            const {name, url} = pokeFromTentyArray
-            const urlArray = url.split('/')
-            const idPoke = urlArray[urlArray.length -2]
-
-            pokeListItem.textContent = idPoke + '.' +capitalize(name)
-         } else{
-            pokeListItem.textContent = ""
-
-         }
-    }
-
-
-})
-
-
-
 //Adding event listeners 
 
+leftButton.addEventListener('click',handleLeftButtonClick)
 rightButton.addEventListener('click',handleRightButtonClick)
+
+for(const pokeListItem of pokeListItems) {
+    pokeListItem.addEventListener('click',handleListItemClick)
+}
+
 
 
 //INITIALIZE APP ()
