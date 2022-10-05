@@ -94,5 +94,11 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0')
     console.log(arrayResultsTwentyPok)
     console.log(pokeListItems.length)
 
+    for(let i=0; i<pokeListItems.length;i++){
+         const pokeListItem = pokeListItems[i]
+         const pokeFromTentyArray = arrayResultsTwentyPok[i]
+         const {name} = arrayResultsTwentyPok
+    }
+
 
 })
