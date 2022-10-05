@@ -77,9 +77,45 @@ fetch(url)
     }
 
 
-})
+})}
 
-}
+
+const fetchPokeData =(id)=>{
+    fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+.then(resultadoFetch1=>{
+    return resultadoFetch1.json()
+})
+.then(respuestaJson=>{
+    resetScreen()
+/*Section to populate the left section of the pokedex and linked 
+the result of the API fetch (which is converted to a JSON) be the data
+that populates the pone name, type, etc with the DOM
+*/
+    const pokemontypes = respuestaJson['types']
+    const pokemonFirstType = pokemontypes[0]
+    const pokemonSecondType = pokemontypes[1]
+    pokeTypeOne.textContent = capitalize(pokemonFirstType['type']['name'])
+    if (pokemonSecondType){
+        pokeTypeTwo.classList.remove('hide')
+        pokeTypeTwo.textContent = capitalize(pokemonSecondType['type']['name'])
+    } else {
+        pokeTypeTwo.classList.add('hide')
+        pokeTypeTwo.textContent = ''
+    }
+
+    mainScreen.classList.add(pokemonFirstType['type']['name'])
+
+    
+    pokeName.textContent = capitalize(respuestaJson['name'])
+    pokeId.textContent ='#'+ respuestaJson['id'].toString().padStart(3,'0')
+    pokeWeight.textContent = respuestaJson['weight']
+    pokeHeigt.textContent = respuestaJson['height']
+
+
+    pokeFrontImage.src = respuestaJson['sprites']['front_default'] || ""
+    pokeBackImage.src = respuestaJson['sprites']['back_default'] || ""
+
+})}
 
 
 
