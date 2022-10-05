@@ -47,7 +47,6 @@ fetch('https://pokeapi.co/api/v2/pokemon/100')
     return resultadoFetch1.json()
 })
 .then(respuestaJson=>{
-    //console.log(respuestaJson)
     resetScreen()
 /*Section to populate the left section of the pokedex and linked 
 the result of the API fetch (which is converted to a JSON) be the data
@@ -84,6 +83,7 @@ that populates the pone name, type, etc with the DOM
 
 //To fetch the POKEAPI and "transform" the result into a JSON 
 //Fetch for the right side of the pokedex (Endpoint ends at /pokemon)
+
 fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0')
 .then(resultadoFetch2=>{
     return resultadoFetch2.json()
@@ -92,22 +92,7 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0')
     console.log(respuestaJson2)
     const arrayResultsTwentyPok = respuestaJson2['results']
     console.log(arrayResultsTwentyPok)
-
-    for (let i=0; pokeListItems.length;i++){
-
-        const pokeListItem = pokeListItems[i]
-        const pokeFromTentyArray = arrayResultsTwentyPok[i]
-        const {name} = arrayResultsTwentyPok
-        console.log(pokeListItem)
-
-        /*if(pokeFromTentyArray) {
-
-            pokeListItem.textContent = name
-
-        } else{
-            pokeListItem.textContent = ""
-        }*/
-    }
+    console.log(pokeListItems.length)
 
 
 })
